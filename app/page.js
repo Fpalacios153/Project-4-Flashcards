@@ -109,7 +109,7 @@ export default function Home() {
                 {''}
                 Access to basic flashcard features and limited storage.
               </Typography>
-              <Button variant="contained" color="primary" sx={{ mt: 2 }} onclick={handleSubmit}>
+              <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
                 subsribe to basic
               </Button>
             </Box>
@@ -129,7 +129,7 @@ export default function Home() {
                 {''}
                 Unlimited flashcards and storage, with priority support.
               </Typography>
-              <Button variant="contained" color="primary" sx={{ mt: 2 }} onclick={handleSubmit}>
+              <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
                 subsribe to pro
               </Button>
             </Box>
