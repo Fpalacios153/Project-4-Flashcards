@@ -1,10 +1,8 @@
-import React from 'react'
-import {
-    Container,
-    Typography,
-    Box,
-    CircularProgress
-  } from '@mui/material'
+'use client'
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import getStripe from "@/utils/get-stripe"
+import { useSearchParams } from "next/navigation"
 
 const ResultPage = () => {
     const router = useRouter()
