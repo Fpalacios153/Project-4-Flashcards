@@ -31,7 +31,6 @@ export default function Flashcard() {
       const docRef = doc(collection(db, 'users'), user.id)
       const docSnap = await getDoc(docRef)
       if (docSnap.exists()) {
-        console.log(docSnap.data())
         const collections = docSnap.data().flashcards || []
         setFlashcards(collections)
       } else {
@@ -40,17 +39,17 @@ export default function Flashcard() {
     }
     getFlashcards()
   }, [user])
-
+  console.log(flashcards)
   return (
     <Container maxWidth="md">
       <Grid container spacing={3} sx={{ mt: 4 }}>
         {flashcards.map((flashcard, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Card>
-              <CardActionArea onClick={() => handleCardClick(flashcard.name)}>
+              <CardActionArea onClick={() => handleCardClick(flashcard)}>
                 <CardContent>
                   <Typography variant="h5" component="div">
-                    {flashcard.name}
+                    {flashcard}
                   </Typography>
                 </CardContent>
               </CardActionArea>
