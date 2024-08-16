@@ -26,6 +26,7 @@ export default function FlashcardSet() {
 
     const searchParams = useSearchParams()
     const search = searchParams.get('id')
+    const router = useRouter()
 
     useEffect(() => {
         async function getFlashcard() {
