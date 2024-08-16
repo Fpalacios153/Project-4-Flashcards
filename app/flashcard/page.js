@@ -34,7 +34,6 @@ export default function FlashcardSet() {
 
             const colRef = collection(doc(collection(db, 'users'), user.id), search)
             const docs = await getDocs(colRef)
-            console.log(docs)
             const flashcards = []
             docs.forEach((doc) => {
                 flashcards.push({ id: doc.id, ...doc.data() })
