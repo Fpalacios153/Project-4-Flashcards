@@ -15,9 +15,10 @@ import {
     Card,
     CardActionArea,
     CardContent,
-    Button
+    Button,
+    IconButton
 } from '@mui/material'
-
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 
 export default function FlashcardSet() {
     const { isLoaded, isSignedIn, user } = useUser()
@@ -50,9 +51,14 @@ export default function FlashcardSet() {
         }))
     }
 
+    const handleSpeak = (text) => {
+        const utterance = new SpeechSynthesisUtterance(text)
+        speechSynthesis.speak(utterance)
+    }
+
     return (
         <Container maxWidth="md">
-            <Button onClick={(() => router.push('/flashcards'))} color="primary" variant="outlined">
+            <Button onClick={() => router.push('/flashcards')} color="primary" variant="outlined">
                 Back to flashcards
             </Button>
             <Grid container spacing={3} sx={{ mt: 4 }}>
@@ -104,11 +110,15 @@ export default function FlashcardSet() {
                                     </Box>
                                 </CardContent>
                             </CardActionArea>
+                            <Box display="flex" justifyContent="center" mb={2}>
+                                <IconButton onClick={() => handleSpeak(flipped[flashcard.id] ? flashcard.back : flashcard.front)} color="primary">
+                                    <VolumeUpIcon />
+                                </IconButton>
+                            </Box>
                         </Card>
                     </Grid>
                 ))}
             </Grid>
-        </Container >
+        </Container>
     )
-
 }
