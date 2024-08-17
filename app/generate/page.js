@@ -42,7 +42,6 @@ export default function Generate() {
   const handleOpenDialog = () => setDialogOpen(true)
   const handleCloseDialog = () => setDialogOpen(false)
 
-
   const handleCardClick = (id) => {
     setFlipped((prev) => ({
       ...prev,
@@ -166,9 +165,9 @@ export default function Generate() {
             Generate Flashcards
           </Button>
         </Box>
-        <Button onClick={(() => router.push('/flashcards'))} color="primary">
+        {/* <Button onClick={(() => router.push('/flashcards'))} color="primary">
           Saved Cards
-        </Button>
+        </Button> */}
 
         {flashcards.length > 0 && (
           <Box sx={{ mt: 4 }}>

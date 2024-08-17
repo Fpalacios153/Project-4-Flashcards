@@ -52,7 +52,7 @@ export default function FlashcardSet() {
 
     return (
         <Container maxWidth="md">
-            <Button onClick={(() => router.push('/flashcards'))} color="primary">
+            <Button onClick={(() => router.push('/flashcards'))} color="primary" variant="outlined">
                 Back to flashcards
             </Button>
             <Grid container spacing={3} sx={{ mt: 4 }}>
