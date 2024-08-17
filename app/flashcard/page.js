@@ -16,14 +16,18 @@ import {
     CardActionArea,
     CardContent,
     Button,
-    IconButton
+    IconButton,
+    Checkbox,
+    FormControlLabel
 } from '@mui/material'
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 
 export default function FlashcardSet() {
     const { isLoaded, isSignedIn, user } = useUser()
     const [flashcards, setFlashcards] = useState([])
-    const [flipped, setFlipped] = useState([])
+    const [flipped, setFlipped] = useState({})
+    const [studied, setStudied] = useState({})
+    const [showStudied, setShowStudied] = useState(true)
 
     const searchParams = useSearchParams()
     const search = searchParams.get('id')
@@ -51,18 +55,35 @@ export default function FlashcardSet() {
         }))
     }
 
+    const handleToggleStudied = (id) => {
+        setStudied((prev) => ({
+            ...prev,
+            [id]: !prev[id],
+        }))
+    }
+
     const handleSpeak = (text) => {
         const utterance = new SpeechSynthesisUtterance(text)
         speechSynthesis.speak(utterance)
     }
+
+    const filteredFlashcards = showStudied
+        ? flashcards
+        : flashcards.filter((flashcard) => !studied[flashcard.id])
 
     return (
         <Container maxWidth="md">
             <Button onClick={() => router.push('/flashcards')} color="primary" variant="outlined">
                 Back to flashcards
             </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+                <FormControlLabel
+                    control={<Checkbox checked={showStudied} onChange={() => setShowStudied(!showStudied)} />}
+                    label="Show Studied Cards"
+                />
+            </Box>
             <Grid container spacing={3} sx={{ mt: 4 }}>
-                {flashcards.map((flashcard) => (
+                {filteredFlashcards.map((flashcard) => (
                     <Grid item xs={12} sm={6} md={4} key={flashcard.id}>
                         <Card>
                             <CardActionArea onClick={() => handleCardClick(flashcard.id)}>
@@ -114,6 +135,12 @@ export default function FlashcardSet() {
                                 <IconButton onClick={() => handleSpeak(flipped[flashcard.id] ? flashcard.back : flashcard.front)} color="primary">
                                     <VolumeUpIcon />
                                 </IconButton>
+                            </Box>
+                            <Box display="flex" justifyContent="center" mb={2}>
+                                <FormControlLabel
+                                    control={<Checkbox checked={studied[flashcard.id] || false} onChange={() => handleToggleStudied(flashcard.id)} />}
+                                    label="Studied"
+                                />
                             </Box>
                         </Card>
                     </Grid>
