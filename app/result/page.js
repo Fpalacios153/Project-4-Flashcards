@@ -20,6 +20,7 @@ const ResultPage = () => {
   const [session, setSession] = useState(null)
   const [error, setError] = useState(null)
   const [count, setCount] = useState(5)
+  const [start, setStart] = useState(false)
 
   useEffect(() => {
     const fetchCheckoutSession = async () => {
@@ -41,16 +42,17 @@ const ResultPage = () => {
     fetchCheckoutSession()
   }, [session_id])
 
-  useEffect(() => {
-    const timer =
-      count > 0 && setInterval(() => setCount((count - 1)), 1000);
+  //comeback to this
+  // useEffect(() => {
+  //   const timer =
+  //     count > 0 && setInterval(() => setCount((count - 1)), 1000);
 
-    setTimeout(() => {
-      return router.push('/generate')
-    }, "5000")
+  //   setTimeout(() => {
+  //     return router.push('/generate')
+  //   }, "5000")
 
-    return () => clearInterval(timer)
-  }, [count])
+  //   return () => clearInterval(timer)
+  // }, [count])
 
   if (loading) {
     return (
@@ -74,6 +76,7 @@ const ResultPage = () => {
 
   return (
     <Container maxWidth="sm" sx={{ textAlign: 'center', mt: 4 }}>
+
       {session.payment_status === 'paid' ? (
         <>
           <Typography variant="h4">Thank you for your purchase!</Typography>
@@ -81,7 +84,8 @@ const ResultPage = () => {
             <Typography variant="h6">Session ID: {session_id}</Typography>
             <Typography variant="body1">
               We have received your payment. You will receive an email with the
-              order details shortly. Redirecting in...{count}
+              order details shortly.
+              {/* Redirecting in...{count} */}
             </Typography>
           </Box>
 
