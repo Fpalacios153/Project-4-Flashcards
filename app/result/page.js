@@ -19,8 +19,7 @@ const ResultPage = () => {
   const [loading, setLoading] = useState(true)
   const [session, setSession] = useState(null)
   const [error, setError] = useState(null)
-  const [count, setCount] = useState(5)
-  const [start, setStart] = useState(false)
+  // const [count, setCount] = useState(5)
 
   useEffect(() => {
     const fetchCheckoutSession = async () => {

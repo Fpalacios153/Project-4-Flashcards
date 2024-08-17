@@ -1,20 +1,15 @@
 'use client'
 import getStripe from '@/utils/get-stripe.js'
+import { SignedIn, SignedOut } from '@clerk/nextjs'
 
 import {
-  AppBar,
-  Toolbar,
+
   Typography,
   Button,
   Box,
   Grid
 } from '@mui/material'
 
-import {
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs'
 
 export default function Home() {
 
@@ -37,33 +32,24 @@ export default function Home() {
 
   return (
     <Box>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Flashcard SaaS
-          </Typography>
-          <SignedOut>
-            <Button color="inherit" href="/sign-in">Login</Button>
-            <Button color="inherit" href="/sign-up">Sign Up</Button>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </Toolbar>
-      </AppBar>
       <Box sx={{ textAlign: 'center', my: 4 }}>
         <Typography variant="h2" component="h1" gutterBottom>
-          Welcome to Flashcard SaaS
+          Welcome to SmartyCards
         </Typography>
         <Typography variant="h5" component="h2" gutterBottom>
-          The easiest way to create flashcards from your text.
+          The easiest way to create flashcards
         </Typography>
-        <Button variant="contained" color="primary" sx={{ mt: 2, mr: 2 }} href="/generate">
-          Get Started
-        </Button>
-        <Button variant="outlined" color="primary" sx={{ mt: 2 }}>
-          Learn More
-        </Button>
+        <SignedOut>
+          <Button variant="contained" color="primary" sx={{ mt: 2, mr: 2 }} href="/sign-in">
+            Get Started
+          </Button>
+        </SignedOut>
+        <SignedIn>
+          <Button variant="contained" color="primary" sx={{ mt: 2, mr: 2 }} href="/generate">
+            Create a new set
+          </Button>
+
+        </SignedIn>
       </Box>
       <Box sx={{ my: 6, p: 3, textAlign: 'center' }}>
         <Typography variant="h4" component="h2" gutterBottom sx={{ mb: 4 }} >Features</Typography>
