@@ -1,43 +1,27 @@
 'use client'
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import getStripe from "@/utils/get-stripe"
 import { useSearchParams } from "next/navigation"
+import {
+  Container,
+  Typography,
+  Box,
+  CircularProgress,
+  Button
+} from '@mui/material'
+import getStripe from "@/utils/get-stripe"
 
 const ResultPage = () => {
-    const router = useRouter()
-    const searchParams = useSearchParams()
-    const session_id = searchParams.get('session_id')
-    const [loading, setLoading] = useState(true)
-    const [session, setSession] = useState(null)
-    const [error, setError] = useState(null)
-  
-    return (
-        <Container maxWidth="sm" sx={{textAlign: 'center', mt: 4}}>
-          {session.payment_status === 'paid' ? (
-            <>
-              <Typography variant="h4">Thank you for your purchase!</Typography>
-              <Box sx={{mt: 2}}>
-                <Typography variant="h6">Session ID: {session_id}</Typography>
-                <Typography variant="body1">
-                  We have received your payment. You will receive an email with the
-                  order details shortly.
-                </Typography>
-              </Box>
-            </>
-          ) : (
-            <>
-              <Typography variant="h4">Payment failed</Typography>
-              <Box sx={{mt: 2}}>
-                <Typography variant="body1">
-                  Your payment was not successful. Please try again.
-                </Typography>
-              </Box>
-            </>
-          )}
-        </Container>
-      )
-  }
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const session_id = searchParams.get('session_id')
+
+  const [loading, setLoading] = useState(true)
+  const [session, setSession] = useState(null)
+  const [error, setError] = useState(null)
+  const [count, setCount] = useState(5)
+  const [start, setStart] = useState(false)
+
   useEffect(() => {
     const fetchCheckoutSession = async () => {
       if (!session_id) return
@@ -58,11 +42,23 @@ const ResultPage = () => {
     fetchCheckoutSession()
   }, [session_id])
 
+  //comeback to this
+  // useEffect(() => {
+  //   const timer =
+  //     count > 0 && setInterval(() => setCount((count - 1)), 1000);
+
+  //   setTimeout(() => {
+  //     return router.push('/generate')
+  //   }, "5000")
+
+  //   return () => clearInterval(timer)
+  // }, [count])
+
   if (loading) {
     return (
-      <Container maxWidth="sm" sx={{textAlign: 'center', mt: 4}}>
+      <Container maxWidth="sm" sx={{ textAlign: 'center', mt: 4 }}>
         <CircularProgress />
-        <Typography variant="h6" sx={{mt: 2}}>
+        <Typography variant="h6" sx={{ mt: 2 }}>
           Loading...
         </Typography>
       </Container>
@@ -70,10 +66,46 @@ const ResultPage = () => {
   }
   if (error) {
     return (
-      <Container maxWidth="sm" sx={{textAlign: 'center', mt: 4}}>
+      <Container maxWidth="sm" sx={{ textAlign: 'center', mt: 4 }}>
         <Typography variant="h6" color="error">
           {error}
         </Typography>
       </Container>
     )
   }
+
+  return (
+    <Container maxWidth="sm" sx={{ textAlign: 'center', mt: 4 }}>
+
+      {session.payment_status === 'paid' ? (
+        <>
+          <Typography variant="h4">Thank you for your purchase!</Typography>
+          <Box sx={{ mt: 2 }}>
+            <Typography variant="h6">Session ID: {session_id}</Typography>
+            <Typography variant="body1">
+              We have received your payment. You will receive an email with the
+              order details shortly.
+              {/* Redirecting in...{count} */}
+            </Typography>
+          </Box>
+
+          <Button onClick={() => { router.push('/generate') }}>Home</Button>
+        </>
+      ) : (
+        <>
+          <Typography variant="h4">Payment failed</Typography>
+          <Box sx={{ mt: 2 }}>
+            <Typography variant="body1">
+              Your payment was not successful. Please try again.
+            </Typography>
+          </Box>
+
+          <Button onClick={() => { router.push('/') }}>Home</Button>
+
+        </>
+      )}
+    </Container>
+  )
+}
+
+export default ResultPage

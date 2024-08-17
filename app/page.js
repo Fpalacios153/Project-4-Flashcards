@@ -1,5 +1,5 @@
 'use client'
-// import getStripe from '@/utils/get-stripe'
+import getStripe from '@/utils/get-stripe.js'
 
 import {
   AppBar,
