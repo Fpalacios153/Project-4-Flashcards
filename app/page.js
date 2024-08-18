@@ -37,7 +37,7 @@ export default function Home() {
           Welcome to SmartyCards
         </Typography>
         <Typography variant="h5" component="h2" gutterBottom>
-          The easiest way to create flashcards
+          Let AI create the best flashcards for you
         </Typography>
         <SignedOut>
           <Button variant="contained" color="primary" sx={{ mt: 2, mr: 2 }} href="/sign-in">
