@@ -75,10 +75,10 @@ export default function FlashcardSet() {
         <Protect>
 
             <Container maxWidth="md">
-                <Button onClick={() => router.push('/flashcards')} color="primary" variant="outlined">
-                    Back to flashcards
-                </Button>
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+                    <Button onClick={() => router.push('/flashcards')} color="primary" variant="outlined">
+                        Back to flashcards
+                    </Button>
                     <FormControlLabel
                         control={<Checkbox checked={showStudied} onChange={() => setShowStudied(!showStudied)} />}
                         label="Show Studied Cards"
@@ -149,6 +149,6 @@ export default function FlashcardSet() {
                     ))}
                 </Grid>
             </Container>
-        </Protect>
+        </Protect >
     )
 }
