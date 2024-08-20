@@ -15,7 +15,7 @@ export default function SignInPage() {
                 <Typography variant="h4" component="h1" gutterBottom>
                     Sign In
                 </Typography>
-                <SignIn />
+                <SignIn fallbackRedirectUrl='/generate' />
             </Box>
         </Box>
     );

@@ -95,9 +95,16 @@ export default function Home() {
                 {''}
                 Access to basic flashcard features and limited storage.
               </Typography>
-              <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
-                subsribe to basic
-              </Button>
+              <SignedIn>
+                <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
+                  subsribe to basic
+                </Button>
+              </SignedIn>
+              <SignedOut>
+                <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={(e) => alert('Sign In to Subsribe')}>
+                  subsribe to basic
+                </Button>
+              </SignedOut>
             </Box>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -115,9 +122,16 @@ export default function Home() {
                 {''}
                 Unlimited flashcards and storage, with priority support.
               </Typography>
-              <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
-                subsribe to pro
-              </Button>
+              <SignedIn>
+                <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
+                  subsribe to pro
+                </Button>
+              </SignedIn>
+              <SignedOut>
+                <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={(e) => alert('Sign In to Subsribe')}>
+                  subsribe to pro
+                </Button>
+              </SignedOut>
             </Box>
           </Grid>
         </Grid>
