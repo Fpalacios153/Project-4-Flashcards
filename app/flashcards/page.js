@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from "next/navigation"
-import { useUser } from "@clerk/nextjs"
+import { useUser, Protect } from "@clerk/nextjs"
 import { useState, useEffect } from "react"
 import { doc, collection, getDoc, setDoc } from 'firebase/firestore'
 import db from '@/firebase'
@@ -39,25 +39,28 @@ export default function Flashcard() {
     }
     getFlashcards()
   }, [user])
-  console.log(flashcards)
+
   return (
-    <Container maxWidth="md">
-      <Grid container spacing={3} sx={{ mt: 4 }}>
-        {flashcards.map((flashcard, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card>
-              <CardActionArea onClick={() => handleCardClick(flashcard)}>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    {flashcard}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <Protect>
+
+      <Container maxWidth="md">
+        <Grid container spacing={3} sx={{ mt: 4 }}>
+          {flashcards.map((flashcard, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Card>
+                <CardActionArea onClick={() => handleCardClick(flashcard)}>
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      {flashcard}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </Protect>
   )
 
 
